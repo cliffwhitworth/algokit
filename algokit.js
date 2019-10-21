@@ -34,7 +34,7 @@ function charMapper(s) {
 // console.log(`Maxchar = ${charMapper(s)}`);
 
 // Provide an array and size of slice and return an array of slices
-function arraySlices(arr, n) {
+function arraySlicer(arr, n) {
     let slices = [];
     let index = 0;
     while (index < arr.length) {
@@ -47,7 +47,7 @@ function arraySlices(arr, n) {
 
 let arr = [1, 2, 3, 4, 5, 6, 7];
 let size = 2;
-// console.log("Array of slices: ", arraySlices(arr, size));
+// console.log("Array of slices: ", arraySlicer(arr, size));
 
 // Check if two strings are anagrams
 function anagrams(a) {

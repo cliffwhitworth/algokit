@@ -35,7 +35,7 @@ def charMapper(s: str) -> None:
 
 # charMapping(s)
 
-def arraySlices(arr: list, size: int) -> None:
+def arraySlicer(arr: list, size: int) -> None:
     """
     Enter a list of integers and size of slices
     Returns list of slices
@@ -50,7 +50,7 @@ def arraySlices(arr: list, size: int) -> None:
 
 arr = [1, 2, 3, 4, 5, 6, 7]
 size = 2
-# arraySlices(arr, size)
+# arraySlicer(arr, size)
 
 def anagrams(s: str) -> None:
     """
@@ -68,16 +68,15 @@ def triangularN(levels: int) -> None:
     Enter number of levels as integer
     Returns a graphical representation of the triangular number
     """
-    level = ""
     Ocount = 0
     for i in range(levels):
         for j in range(levels):
             if j < i + 1:
-                level += "O"
+                print("O", end="")
                 Ocount += 1
             else:
-                level += " "
-        print(level)
+                print(" ", end=" ")
+        print()
         level = ""
     print("The triangular number, n(n+1)/2, nCk where n + 1 = 6 and k = 2, for {} is {}".format(levels, Ocount))
 
