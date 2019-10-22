@@ -76,7 +76,8 @@ namespace Algokit
                 }
                 else
                 {
-                    slices[i] = lst.GetRange(index,arr.Length%s).ToArray();
+                    int e = (arr.Length%s == 0) ? s: arr.Length%s;
+                    slices[i] = lst.GetRange(index,e).ToArray();
                 }
             }
 
