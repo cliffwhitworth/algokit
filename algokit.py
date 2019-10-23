@@ -2,17 +2,17 @@ import math
 import numpy as np
 import re
 
-def stringReversal(s: str) -> None:
+def stringReversal(s: str) -> str:
     """
     Enter a string
     Returns reversed string
     """
-    print("".join(reversed(s)))
+    return "".join(reversed(s))
 
 s = "Hello World!"
-# stringReversal(s)
+# print("Reverse of \"{}\" is \"{}\"".format(s, stringReversal(s)))
 
-def charMapper(s: str) -> None:
+def charMapper(s: str) -> str:
     """
     Enter a string
     Returns the character that appears most
@@ -31,12 +31,12 @@ def charMapper(s: str) -> None:
             maxchar = k
             max = v
 
-    print("Maxchar = {}".format(maxchar))
+    return maxchar
 
 
-# charMapping(s)
+# print("Maxchar = {}".format(charMapper(s)))
 
-def arraySlicer(arr: list, size: int) -> None:
+def arraySlicer(arr: list, size: int) -> list:
     """
     Enter a list of integers and size of slices
     Returns list of slices
@@ -47,13 +47,13 @@ def arraySlicer(arr: list, size: int) -> None:
         slices.append(arr[index:index + size])
         index += size
 
-    print(slices)
+    return slices
 
 arr = [1, 2, 3, 4, 5, 6, 7]
 size = 2
-# arraySlicer(arr, size)
+# print(arraySlicer(arr, size))
 
-def anagrams(s: str) -> None:
+def anagrams(s: str) -> str:
     """
     Enter string
     Returns lowercase string stripped of whitespace and sorted
@@ -67,7 +67,7 @@ a2 = "Twelve plus one"
 def triangularN(levels: int) -> None:
     """
     Enter number of levels as integer
-    Returns a graphical representation of the triangular number
+    Prints a graphical representation of the triangular number
     """
     Ocount = 0
     for i in range(levels):
@@ -78,23 +78,25 @@ def triangularN(levels: int) -> None:
             else:
                 print(" ", end=" ")
         print()
+        
     print("The triangular number, n(n+1)/2, nCk where n + 1 = 6 and k = 2, for {} is {}".format(levels, Ocount))
 
 # triangularN(5)
 
-def isTriangular(n: int) -> None:
+def isTriangular(n: int) -> bool:
     """
     Enter integer
-    Return Bool if Triangular, (sqrt(1 + 8n) + 1) / 2 is an integer
+    Returns bool if Triangular, (sqrt(1 + 8n) + 1) / 2 is an integer
     """
-    print("{} is a triangular number? {}".format(n, ((math.sqrt(1 + 8 * n) + 1) / 2).is_integer()))
+    return ((math.sqrt(1 + 8 * n) + 1) / 2).is_integer()
 
-# isTriangular(21)
+n = 21
+# print("{} is a triangular number? {}".format(n, isTriangular(n)))
 
 def numSpirals(levels: int) -> None:
     """
     Enter number of levels
-    Return a matrix of spiraling count from 1 to n**2
+    Prints a matrix of spiraling count from 1 to n**2
     """
     cnt = 1
     startRow = 0
@@ -131,18 +133,17 @@ def numSpirals(levels: int) -> None:
 
 # numSpirals(5)
 
+# initialize memo outside of function
+memo = dict()
 def fibRecursion(n: int) -> int:
     """
     Enter integer n
     Returns Fibonacci number at index n
-    """
-    # Use memoization
-    memo = dict()
-    
+    """ 
     # If key value already exists return value
     if n in memo:
         return memo[n]
-    
+
     if n < 2:
         return n
 
@@ -152,7 +153,11 @@ def fibRecursion(n: int) -> int:
 
     return result
 
-def isFibonacci(n: int) -> None:
+def isFibonacci(n: int) -> bool:
+    """
+    Enter an integer
+    Returns bool 
+    """
     if math.sqrt(5 * n**2 + 4).is_integer() or math.sqrt(5 * n**2 - 4).is_integer():
         return True
 
@@ -167,7 +172,7 @@ def neighborDetector(s: str) -> None:
     """
     Enter a string with rows and cols of matrix shape 
         and 1s and 0s of length rows x cols
-    Return a string representing each index of input
+    Prints a string representing each index of input
         if 1 a 1, if 0, how many 1s are 1 unit neighbors
         above, below, to the left / right, and each diagonal
     """

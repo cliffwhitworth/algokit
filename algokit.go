@@ -10,6 +10,9 @@ import (
 	"strings"
 )
 
+// use memoization for fibRecursion (cache)
+var memo = make(map[int]int)
+
 func main() {
 	// s := "Hello World!"
 	// stringReversal(s)
@@ -165,12 +168,11 @@ func cli() {
 	// Get user input
 	fmt.Print("Enter an integer: ")
 	reader := bufio.NewReader(os.Stdin)
-	resp, err := reader.ReadByte()
+	resp, err := reader.ReadString('\r')
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
-	// use string for Atoi
-	n, err := strconv.Atoi(string(resp))
+	n, err := strconv.Atoi(strings.Trim(resp, "\r"))
 	if err != nil {
 		fmt.Fprintln(os.Stderr, err)
 	}
@@ -178,9 +180,6 @@ func cli() {
 }
 
 func fibRecursion(n int) int {
-	// use memoization (cache)
-	memo := make(map[int]int)
-
 	// check if cached
 	if _, ok := memo[n]; ok {
 		return memo[n]
@@ -192,6 +191,6 @@ func fibRecursion(n int) int {
 
 	result := fibRecursion(n-2) + fibRecursion(n-1)
 	memo[n] = result
-	
+
 	return result
 }
