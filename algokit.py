@@ -2,7 +2,7 @@ import math
 import numpy as np
 import re
 
-def stringReversal(s: str) -> str:
+def string_reversal(s: str) -> str:
     """
     Enter a string
     Returns reversed string
@@ -10,9 +10,9 @@ def stringReversal(s: str) -> str:
     return "".join(reversed(s))
 
 s = "Hello World!"
-# print("Reverse of \"{}\" is \"{}\"".format(s, stringReversal(s)))
+# print("Reverse of \"{}\" is \"{}\"".format(s, string_reversal(s)))
 
-def charMapper(s: str) -> str:
+def char_mapper(s: str) -> str:
     """
     Enter a string
     Returns the character that appears most
@@ -34,9 +34,9 @@ def charMapper(s: str) -> str:
     return maxchar
 
 
-# print("Maxchar = {}".format(charMapper(s)))
+# print("Maxchar = {}".format(char_mapper(s)))
 
-def arraySlicer(arr: list, size: int) -> list:
+def array_slicer(arr: list, size: int) -> list:
     """
     Enter a list of integers and size of slices
     Returns list of slices
@@ -51,7 +51,7 @@ def arraySlicer(arr: list, size: int) -> list:
 
 arr = [1, 2, 3, 4, 5, 6, 7]
 size = 2
-# print(arraySlicer(arr, size))
+# print(array_slicer(arr, size))
 
 def anagrams(s: str) -> str:
     """
@@ -64,7 +64,7 @@ a1 = "Eleven plus two"
 a2 = "Twelve plus one"
 # print("Strings are anagrams? {}".format(anagrams(a1) == anagrams(a2)))
 
-def triangularN(levels: int) -> None:
+def triangular_n(levels: int) -> None:
     """
     Enter number of levels as integer
     Prints a graphical representation of the triangular number
@@ -81,9 +81,9 @@ def triangularN(levels: int) -> None:
         
     print("The triangular number, n(n+1)/2, nCk where n + 1 = 6 and k = 2, for {} is {}".format(levels, Ocount))
 
-# triangularN(5)
+# triangular_n(5)
 
-def isTriangular(n: int) -> bool:
+def is_triangular(n: int) -> bool:
     """
     Enter integer
     Returns bool if Triangular, (sqrt(1 + 8n) + 1) / 2 is an integer
@@ -91,9 +91,9 @@ def isTriangular(n: int) -> bool:
     return ((math.sqrt(1 + 8 * n) + 1) / 2).is_integer()
 
 n = 21
-# print("{} is a triangular number? {}".format(n, isTriangular(n)))
+# print("{} is a triangular number? {}".format(n, is_triangular(n)))
 
-def numSpirals(levels: int) -> None:
+def num_spirals(levels: int) -> None:
     """
     Enter number of levels
     Prints a matrix of spiraling count from 1 to n**2
@@ -131,11 +131,11 @@ def numSpirals(levels: int) -> None:
   
     print(matrix)
 
-# numSpirals(5)
+# num_spirals(5)
 
 # initialize memo outside of function
 memo = dict()
-def fibRecursion(n: int) -> int:
+def fib_recursion(n: int) -> int:
     """
     Enter integer n
     Returns Fibonacci number at index n
@@ -148,12 +148,12 @@ def fibRecursion(n: int) -> int:
         return n
 
     # Add Fibonacci n - 1 with n - 2 using recursion and store in memo
-    result = fibRecursion(n - 2) + fibRecursion(n - 1)
+    result = fib_recursion(n - 2) + fib_recursion(n - 1)
     memo[n] = result
 
     return result
 
-def isFibonacci(n: int) -> bool:
+def is_fibonacci(n: int) -> bool:
     """
     Enter an integer
     Returns bool 
@@ -165,10 +165,10 @@ def isFibonacci(n: int) -> bool:
 
 # Use command-line interface
 # n = input("Enter integer: ")
-# print("Fibonacci number at index {} is {}".format(n, fibRecursion(int(n))))
-# print("Is {} Fibonacci? {}".format(n, isFibonacci(int(n))))
+# print("Fibonacci number at index {} is {}".format(n, fib_recursion(int(n))))
+# print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
 
-def neighborDetector(s: str) -> None:
+def neighbor_detector(s: str) -> None:
     """
     Enter a string with rows and cols of matrix shape 
         and 1s and 0s of length rows x cols
@@ -193,10 +193,47 @@ def neighborDetector(s: str) -> None:
                 print("".join([str(c) for c in matrix[x-filter:x+filter+1,y-filter:y+filter+1]
                         .ravel()]).count("1"), end="")
 
-# s = " 3, 5, ; 110000000000111"
-# neighborDetector(s)
+s = " 3, 5, ; 110000000000111"
+# neighbor_detector(s)
+
+def geo_series(factor: float, start: int, span: int) -> None:
+    """
+    Enter a factor / probability and a value and range from that value
+    Return the geometric mean
+    """
+    adjStart = start
+    if start < 2:
+        print("start must be >= 2")
+    
+    if span > 1:
+        adjStart = 2
+
+    series = 0
+    for n in range(adjStart, start + span):
+        # series += (n / (math.pow(2, n - 1)))
+        series += n * math.pow(factor, n - 1)
+        if n >= start:
+            print("{}: {}".format(n, series))
 
 
+# geo_series(.5, 5, 10)
 
+def geo_mean(lst: list) -> None:
+    print("{0:.2f}".format(math.pow(np.prod(lst), (1 / len(lst)))))
 
+# geo_mean([1, 3, 9, 27, 81])
 
+def is_geometric(lst: list) -> bool:
+    if len(lst) <= 2:
+        print("List must contain 3 or more numbers")
+        return False
+
+    ratio = lst[0] / lst[1]
+
+    for i in range(2, len(lst)):
+        if lst[i - 1] / lst[i] != ratio:
+            return False
+ 
+        return True
+
+# print("Is geometric series? {}".format(is_geometric([1, 3, 9, 27, 81])))
