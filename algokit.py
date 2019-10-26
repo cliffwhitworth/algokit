@@ -93,6 +93,38 @@ def is_triangular(n: int) -> bool:
 n = 21
 # print("{} is a triangular number? {}".format(n, is_triangular(n)))
 
+def prob_pyramid(levels: int) -> None:
+    """
+    Currently for 2 six sided dice only
+    Needs to scale 
+    Needs refactoring
+    Enter levels of triangle (6)
+    Prints a pyramid of combinations of rolls of two dice
+    """
+    level_length = levels * 2 - 1
+    level_midpoint = levels - 1
+    k = int(levels / 2)
+    l = level_midpoint - levels
+    for i in range(levels):
+        for j in range(level_length):
+            if j < level_midpoint - i or j > level_midpoint + i:
+                print("     ", end="")
+            else: 
+                if i % 2 == 0:
+                    d2 = level_midpoint + l if j > level_midpoint else j + l 
+                    d1 = d1 + 1 if j > level_midpoint else k    
+                else: 
+                    d1 = level_midpoint + l if j > level_midpoint else j + l 
+                    d2 = d2 + 1 if j > level_midpoint else k 
+                
+                print("[{},{}]".format(d1, d2), end="")
+        print()
+        if i % 2 == 1:
+            k -= 1
+            l += 1
+
+prob_pyramid(6)
+
 def num_spirals(levels: int) -> None:
     """
     Enter number of levels
