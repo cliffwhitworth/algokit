@@ -93,37 +93,43 @@ def is_triangular(n: int) -> bool:
 n = 21
 # print("{} is a triangular number? {}".format(n, is_triangular(n)))
 
-def prob_pyramid(levels: int) -> None:
+def prob_pyramid(n: int = 6) -> None:
     """
-    Currently for 2 six sided dice only
-    Needs to scale 
-    Needs refactoring
-    Enter levels of triangle (6)
+    Enter sides of dice (6) > 1 < 10
     Prints a pyramid of combinations of rolls of two dice
     """
-    level_length = levels * 2 - 1
-    level_midpoint = levels - 1
-    k = int(levels / 2)
-    l = level_midpoint - levels
-    for i in range(levels):
-        for j in range(level_length):
-            if j < level_midpoint - i or j > level_midpoint + i:
+    if n < 2 or n > 9:
+        print("Number out of range")
+        return
+    length = (n * 2) - 1
+    midpoint = n - 1
+    k = math.ceil(n / 2)
+    l = n - (k + midpoint - 1)
+    if n % 2 == 0:
+        oe = 0
+    else: 
+        oe = 1
+    d = []
+    for i in range(n):
+        for j in range(length):
+            if j < midpoint - i or j > midpoint + i:
                 print("     ", end="")
-            else: 
+            else:
+                m = j - i - k + 1
+                p = midpoint + l if j > midpoint else j + l
                 if i % 2 == 0:
-                    d2 = level_midpoint + l if j > level_midpoint else j + l 
-                    d1 = d1 + 1 if j > level_midpoint else k    
-                else: 
-                    d1 = level_midpoint + l if j > level_midpoint else j + l 
-                    d2 = d2 + 1 if j > level_midpoint else k 
-                
-                print("[{},{}]".format(d1, d2), end="")
+                    d = [m + oe if j > midpoint else k, p]
+                else:
+                    d = [p + oe, m + 1 if j > midpoint else k - oe]
+
+                print("[{},{}]".format(d[0],d[1]), end="")
+
         print()
         if i % 2 == 1:
             k -= 1
             l += 1
 
-prob_pyramid(6)
+prob_pyramid(8)
 
 def num_spirals(levels: int) -> None:
     """
@@ -138,7 +144,7 @@ def num_spirals(levels: int) -> None:
     matrix = np.zeros((levels, levels))
     # matrix = [[] for _ in range(levels)] 
     # for i in range(0, levels):
-    #     levels[i] = [0 for i in range(levels)]
+    #     matrix[i] = [0 for i in range(levels)]
 
     while startRow <= endRow and startCol <= endCol:
         for i in range(startCol, endCol + 1):
