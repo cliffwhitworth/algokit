@@ -133,3 +133,50 @@ def spiral_matrix(n: int) -> None:
 
 # spiral_matrix(5)
 
+def fib(n: int) -> int:
+    if n in cache:
+        return cache[n]
+    
+    if n < 2:
+        return n
+
+    result = fib(n-2) + fib(n-1)
+    cache[n] = result
+    return result
+
+cache = {}
+# print(fib(8))
+
+import math
+def is_fibonacci(n: int) -> bool:
+    return (math.sqrt(5 * n * n -4)).is_integer() or (math.sqrt(5 * n * n +4)).is_integer()
+
+# print(is_fibonacci(21))
+# for i in range(1, 100):
+#     if is_fibonacci(i):
+#         print("{} is fibonacci".format(i))
+
+import re
+import numpy as np
+def neighbor_detector(s: str) -> str:
+    splt = s.split(";")
+    rows, cols = [int(d) for d in re.findall("\\d+", splt[0])]
+    matrix = np.asarray([str(c) for c in re.findall("\\S", splt[1])]).reshape(rows, cols)
+    print(matrix)
+    matrix = np.pad(matrix, 1, "constant")
+    rtnstr = ""
+    for x, y in np.ndindex(matrix.shape):
+        if x != 0 and x != rows + 1 and y != 0 and y != cols + 1:
+            if matrix[x, y] == "*":
+                # print("*", end="")
+                rtnstr += "*"
+            else:
+                # print([str(c) for c in matrix[x-1:x+2,y-1:y+2].ravel()].count("*"), end="")
+                rtnstr += str([str(c) for c in matrix[x-1:x+2,y-1:y+2].ravel()].count("*"))
+
+    return rtnstr
+    
+
+s = " 3, 5, ;**..........***"
+print(neighbor_detector(s))
+

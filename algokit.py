@@ -129,7 +129,7 @@ def prob_pyramid(n: int = 6) -> None:
             k -= 1
             l += 1
 
-prob_pyramid(8)
+# prob_pyramid(8)
 
 def num_spirals(levels: int) -> None:
     """
@@ -228,6 +228,7 @@ def neighbor_detector(s: str) -> None:
             if matrix[x,y] == 1:
                 print("1", end="")
             else:
+                # print([str(c) for c in matrix[x-1:x+2,y-1:y+2].ravel()].count("*"), end="")
                 print("".join([str(c) for c in matrix[x-filter:x+filter+1,y-filter:y+filter+1]
                         .ravel()]).count("1"), end="")
 
@@ -254,7 +255,7 @@ def geo_series(factor: float, start: int, span: int) -> None:
             print("{}: {}".format(n, series))
 
 
-# geo_series(.5, 5, 10)
+geo_series(.5, 5, 10)
 
 def geo_mean(lst: list) -> None:
     print("{0:.2f}".format(math.pow(np.prod(lst), (1 / len(lst)))))

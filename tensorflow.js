@@ -2,7 +2,7 @@ const tf = require('@tensorflow/tfjs');
 
 // Optional Load the binding:
 // Use '@tensorflow/tfjs-node-gpu' if running with GPU.
-require('@tensorflow/tfjs-node');
+// require('@tensorflow/tfjs-node');
 
 // Train a simple model:
 const model = tf.sequential();
@@ -16,6 +16,15 @@ const ys = tf.randomNormal([100, 1]);
 model.fit(xs, ys, {
   epochs: 100,
   callbacks: {
-    onEpochEnd: (epoch, log) => console.log(`Epoch ${epoch}: loss = ${log.loss}`)
+    onEpochEnd: (epoch, log) => console.log(`Epoch ${epoch}: loss = ${log.loss}`),
+    onTrainEnd: (log) => {
+      console.log("Training End");
+      xs.dispose();
+      ys.dispose();
+      model.dispose();
+      console.log("Number of tensors: %s", tf.memory().numTensors);
+    }
   }
 });
+
+console.log("Number of tensors: %s", tf.memory().numTensors);
