@@ -105,10 +105,7 @@ def prob_pyramid(n: int = 6) -> None:
     midpoint = n - 1
     k = math.ceil(n / 2)
     l = n - (k + midpoint - 1)
-    if n % 2 == 0:
-        oe = 0
-    else: 
-        oe = 1
+    oe = n % 2
     d = []
     for i in range(n):
         for j in range(length):
@@ -129,7 +126,7 @@ def prob_pyramid(n: int = 6) -> None:
             k -= 1
             l += 1
 
-# prob_pyramid(8)
+prob_pyramid(6)
 
 def num_spirals(levels: int) -> None:
     """
@@ -255,7 +252,7 @@ def geo_series(factor: float, start: int, span: int) -> None:
             print("{}: {}".format(n, series))
 
 
-geo_series(.5, 5, 10)
+# geo_series(.5, 5, 10)
 
 def geo_mean(lst: list) -> None:
     print("{0:.2f}".format(math.pow(np.prod(lst), (1 / len(lst)))))
