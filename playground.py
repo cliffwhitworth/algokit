@@ -1,11 +1,9 @@
-import math
+import re
+def anagram(s: str) -> str:
+    return ''.join(sorted(re.findall('\\S', s.lower())))
 
-def prob_pyramid(n: int)->None:
-    length = n * 2 - 1
-    mid = n - 1
-    k = math.ceil(n/2)
-    l = n - (k + mid - 1)
-    oe = n % 2
-    print(oe)
-
-prob_pyramid(7)
+a1 = 'Eleven plus two'
+a2 = 'Twelve plus one'
+print(anagram(a1))
+print(anagram(a2))
+print(anagram(a1) == anagram(a2))

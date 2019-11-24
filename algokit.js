@@ -51,7 +51,7 @@ let size = 2;
 
 // Check if two strings are anagrams
 function anagrams(a) {
-    return a.replace(/\s/g, "").toLowerCase().split("").sort().join("");
+    return s.toLowerCase().match(/\S/g).sort().join("");
 }
 
 let a1 = "Eleven plus two";

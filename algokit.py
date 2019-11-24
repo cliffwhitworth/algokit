@@ -58,7 +58,7 @@ def anagrams(s: str) -> str:
     Enter string
     Returns lowercase string stripped of whitespace and sorted
     """
-    return "".join(sorted("".join(re.findall("\\S", s)).lower()))
+    return ''.join(sorted(re.findall('\\S', s.lower())))
 
 a1 = "Eleven plus two"
 a2 = "Twelve plus one"
@@ -126,7 +126,7 @@ def prob_pyramid(n: int = 6) -> None:
             k -= 1
             l += 1
 
-prob_pyramid(6)
+# prob_pyramid(6)
 
 def num_spirals(levels: int) -> None:
     """
@@ -193,15 +193,12 @@ def is_fibonacci(n: int) -> bool:
     Enter an integer
     Returns bool 
     """
-    if math.sqrt(5 * n**2 + 4).is_integer() or math.sqrt(5 * n**2 - 4).is_integer():
-        return True
-
-    return False 
+    return math.sqrt(5 * n**2 + 4).is_integer() or math.sqrt(5 * n**2 - 4).is_integer()
 
 # Use command-line interface
-# n = input("Enter integer: ")
+n = input("Enter integer: ")
 # print("Fibonacci number at index {} is {}".format(n, fib_recursion(int(n))))
-# print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
+print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
 
 def neighbor_detector(s: str) -> None:
     """
