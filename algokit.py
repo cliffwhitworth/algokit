@@ -98,9 +98,6 @@ def prob_pyramid(n: int = 6) -> None:
     Enter sides of dice (6) > 1 < 10
     Prints a pyramid of combinations of rolls of two dice
     """
-    if n < 2 or n > 9:
-        print("Number out of range")
-        return
     length = (n * 2) - 1
     midpoint = n - 1
     k = math.ceil(n / 2)
@@ -126,7 +123,11 @@ def prob_pyramid(n: int = 6) -> None:
             k -= 1
             l += 1
 
-# prob_pyramid(6)
+n = int(input('Enter integer between 2 and 9: '))
+if n < 2 or n > 9:
+    print('Input out of range')
+else:
+    prob_pyramid(n)
 
 def num_spirals(levels: int) -> None:
     """
@@ -196,9 +197,9 @@ def is_fibonacci(n: int) -> bool:
     return math.sqrt(5 * n**2 + 4).is_integer() or math.sqrt(5 * n**2 - 4).is_integer()
 
 # Use command-line interface
-n = input("Enter integer: ")
+# n = input("Enter integer: ")
 # print("Fibonacci number at index {} is {}".format(n, fib_recursion(int(n))))
-print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
+# print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
 
 def neighbor_detector(s: str) -> None:
     """

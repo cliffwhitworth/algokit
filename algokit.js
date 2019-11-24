@@ -110,29 +110,59 @@ function isTriangular(n) {
     return Number.isInteger((Math.sqrt(1 + 8 * n) + 1) / 2);
 }
 
-for (let i = 0; i < 100; i++) {
-    if (isTriangular(i)) console.log(i);
-}
+// for (let i = 0; i < 100; i++) {
+//     if (isTriangular(i)) console.log(i);
+// }
 
 // Enter number of levels and print a pyramid of #s
-function pyramid(levels) {
-    let levelLength = levels * 2 - 1;
-    let midway = levels - 1;
-    let level = "";
-    for (let i = 0; i < levels; i++) {
-        for (let j = 0; j < levelLength; j++) {
-            if (j < midway - i || j > midway + i) {
-                level += ".";
+function propPyramid(n) {
+    const length = n * 2 - 1;
+    const mid = n - 1;
+    let level = '';
+    let k = Math.ceil(n / 2);
+    let l = n - (k + mid - 1);
+    let oe = n % 2;
+    let d = [];
+    for (let i = 0; i < n; i++) {
+        for (let j = 0; j < length; j++) {
+            if (j < mid - i || j > mid + i) {
+                level += '     ';
             } else {
-                level += "#";
+                let m = j - i - k + 1;
+                let p = j > mid?mid+l:j+l;
+                if (i % 2 == 0) {
+                    let q = j > mid?m+oe:k;
+                    d = [q, p]
+                } else {
+                    let q = j > mid?m+1:k-oe;
+                    d = [p+oe,q]
+                }
+                level += `[${d[0]},${d[1]}]`;
             }
         }
+        if (i % 2 == 1) {
+            k -= 1
+            l += 1
+        }
         console.log(level);
-        level = "";
-    }
+        level = '';
+    } 
 }
 
-// pyramid(5)
+let readline = require("readline").createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+readline.question("Enter number between 2 and 9: ", (n) => {   
+    if (n < 2 || n > 9) {
+        readline.close();
+        console.log('Input out of range');
+        return false;
+    }
+    propPyramid(n);
+    readline.close();
+});
 
 // Enter levels and return a matrix of spiraling numbers
 function numSpiral(levels) {
@@ -204,9 +234,9 @@ function isFibonacci(n) {
     return Number.isInteger(Math.sqrt(5 * n * n + 4)) || Number.isInteger(Math.sqrt(5 * n * n - 4));
 }
 
-for (let i = 0; i < 100; i++) {
-    if (isFibonacci(i)) console.log(i);
-}
+// for (let i = 0; i < 100; i++) {
+//     if (isFibonacci(i)) console.log(i);
+// }
 
 // Console line input
 // let readline = require("readline").createInterface({
