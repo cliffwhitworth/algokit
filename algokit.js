@@ -149,20 +149,20 @@ function propPyramid(n) {
     } 
 }
 
-let readline = require("readline").createInterface({
-    input: process.stdin,
-    output: process.stdout
-});
+// let readline = require("readline").createInterface({
+//     input: process.stdin,
+//     output: process.stdout
+// });
 
-readline.question("Enter number between 2 and 9: ", (n) => {   
-    if (n < 2 || n > 9) {
-        readline.close();
-        console.log('Input out of range');
-        return false;
-    }
-    propPyramid(n);
-    readline.close();
-});
+// readline.question("Enter number between 2 and 9: ", (n) => {   
+//     if (n < 2 || n > 9) {
+//         readline.close();
+//         console.log('Input out of range');
+//         return false;
+//     }
+//     propPyramid(n);
+//     readline.close();
+// });
 
 // Enter levels and return a matrix of spiraling numbers
 function numSpiral(levels) {
@@ -209,9 +209,8 @@ function numSpiral(levels) {
 // console.log(numSpiral(5));
 
 // Recursion example using Fibonacci. Get the nth number of the Fibonacci series using memoization
+let memo = {};
 function fibRecursion(n) {
-    let memo = {};
-
     if (memo[n]) {
         return memo[n];
     }
@@ -227,7 +226,7 @@ function fibRecursion(n) {
 }
 
 let n = 8;
-// console.log(`The number at position ${n} in the Fibonacci series is ${fibRecursion(n)}`);
+console.log(`The number at position ${n} in the Fibonacci series is ${fibRecursion(n)}`);
 
 // See if square root of (5 * n * n +- 4) is an integer
 function isFibonacci(n) {
