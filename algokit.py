@@ -123,11 +123,11 @@ def prob_pyramid(n: int = 6) -> None:
             k -= 1
             l += 1
 
-n = int(input('Enter integer between 2 and 9: '))
-if n < 2 or n > 9:
-    print('Input out of range')
-else:
-    prob_pyramid(n)
+# n = int(input('Enter integer between 2 and 9: '))
+# if n < 2 or n > 9:
+#     print('Input out of range')
+# else:
+#     prob_pyramid(n)
 
 def num_spirals(levels: int) -> None:
     """
@@ -201,7 +201,7 @@ def is_fibonacci(n: int) -> bool:
 # print("Fibonacci number at index {} is {}".format(n, fib_recursion(int(n))))
 # print("Is {} Fibonacci? {}".format(n, is_fibonacci(int(n))))
 
-def neighbor_detector(s: str) -> None:
+def neighbor_detector(s: str) -> str:
     """
     Enter a string with rows and cols of matrix shape 
         and 1s and 0s of length rows x cols
@@ -209,26 +209,23 @@ def neighbor_detector(s: str) -> None:
         if 1 a 1, if 0, how many 1s are 1 unit neighbors
         above, below, to the left / right, and each diagonal
     """
-    arr = s.split(";")
-    rows, cols = [int(d) for d in re.findall("\\d", arr[0])]
-    matrix = np.asarray([int(c) for c in re.findall("\\S", arr[1])]).reshape(rows, cols)  
-    print(matrix)  
-    
-    # Make a square filter, 1x1 = 1, 2x2 = 2, etc.    
-    filter = 1
-    matrix = np.pad(matrix, filter, "constant")
+    splt = s.split(';')
+    rows, cols = [int(d) for d in re.findall('\\d', splt[0])]
+    matrix = np.array(re.findall('\\S', splt[1])).reshape(rows, cols)
+    print(matrix)
+    matrix = np.pad(matrix, 1, 'constant')
+    rtnstr = ''
     for x, y in np.ndindex(matrix.shape):
-        if (x != filter - 1 and x != rows + filter 
-                and y != filter - 1 and y != cols + filter):
-            if matrix[x,y] == 1:
-                print("1", end="")
+        if x > 0 and x < rows + 1 and y > 0 and y < cols + 1:
+            if matrix[x, y] == '*':
+                rtnstr += '*'
             else:
-                # print([str(c) for c in matrix[x-1:x+2,y-1:y+2].ravel()].count("*"), end="")
-                print("".join([str(c) for c in matrix[x-filter:x+filter+1,y-filter:y+filter+1]
-                        .ravel()]).count("1"), end="")
+                rtnstr += str(''.join(matrix[x-1:x+2,y-1:y+2].flatten()).count('*'))
+    
+    return rtnstr
 
-s = " 3, 5, ; 110000000000111"
-# neighbor_detector(s)
+s = " 3, 5, ; **..........***"
+print(neighbor_detector(s))
 
 def geo_series(factor: float, start: int, span: int) -> None:
     """
