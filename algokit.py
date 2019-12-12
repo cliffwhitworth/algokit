@@ -204,9 +204,9 @@ def is_fibonacci(n: int) -> bool:
 def neighbor_detector(s: str) -> str:
     """
     Enter a string with rows and cols of matrix shape 
-        and 1s and 0s of length rows x cols
+        and *s and .s of length rows x cols ( 3, 5, ; **..........*** )
     Prints a string representing each index of input
-        if 1 a 1, if 0, how many 1s are 1 unit neighbors
+        if * a *, if ., how many *s are 1 unit neighbors
         above, below, to the left / right, and each diagonal
     """
     splt = s.split(';')
