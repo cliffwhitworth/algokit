@@ -266,7 +266,28 @@ const tensorSpirals = n => {
     matrix.toTensor().print();
 }
 
-tensorSpirals(5);
+// tensorSpirals(5);
+
+const mineDetector = s => {
+    splt = s.split(';');
+    let [rows, cols] = splt[0].match(/\d/g).map(Number);
+    let strArr = splt[1].match(/\S/g).join('').replace(/\*|./g, c => {return c=='*'?1:0}).split('').map(Number);
+    let temp = tf.tensor1d(strArr).reshape([rows,cols]).pad([[1,1],[1,1]]);
+    rtnstr = ''
+    for (x = 1; x <= rows; x++) {
+        for (y = 1; y <= cols; y++) {
+            if(temp.slice([x,y],[1,1]).dataSync() == 1) {
+                rtnstr += '*'
+            } else {
+                rtnstr += temp.slice([x-1,y-1],[3,3]).sum().dataSync();
+            }
+        }
+    }
+    return rtnstr;
+}
+
+s = ' 3, 5, ; **..........*** ';
+// console.log(mineDetector(s));
 
 // Console line input
 // let readline = require("readline").createInterface({
