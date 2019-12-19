@@ -226,7 +226,7 @@ function fibRecursion(n) {
 }
 
 let n = 8;
-console.log(`The number at position ${n} in the Fibonacci series is ${fibRecursion(n)}`);
+// console.log(`The number at position ${n} in the Fibonacci series is ${fibRecursion(n)}`);
 
 // See if square root of (5 * n * n +- 4) is an integer
 function isFibonacci(n) {
@@ -236,6 +236,37 @@ function isFibonacci(n) {
 // for (let i = 0; i < 100; i++) {
 //     if (isFibonacci(i)) console.log(i);
 // }
+
+const tf = require('@tensorflow/tfjs');
+const tensorSpirals = n => {
+    const matrix = tf.buffer([n,n]);
+    let count = 1;
+    let startRow = 0;
+    let endRow = n - 1;
+    let startCol = 0;
+    let endCol = n - 1;
+    while(startRow <= endRow && startCol <= endCol) {
+        for(let i = startCol; i <= endCol; i++) {
+            matrix.set(count++, startRow, i);
+        }
+        startRow++;
+        for(let i = startRow; i <= endRow; i++) {
+            matrix.set(count++, i, endCol);
+        }
+        endCol--;
+        for(let i = endCol; i >= startCol; i--) {
+            matrix.set(count++, endRow, i);
+        }
+        endRow--;
+        for(let i = endRow; i >= startRow; i--) {
+            matrix.set(count++, i, startCol);
+        }
+        startCol++;
+    }
+    matrix.toTensor().print();
+}
+
+tensorSpirals(5);
 
 // Console line input
 // let readline = require("readline").createInterface({
